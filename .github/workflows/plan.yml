@@ -13,6 +13,24 @@ jobs:
         working-directory: terraform
     steps:
       - uses: actions/checkout@v6
+
+      - name: Trivy report (low/medium, never fails)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: config
+          scan-ref: terraform
+          severity: LOW,MEDIUM
+          exit-code: "0"
+
+      - name: Trivy gate (high/critical, fails the PR)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: config
+          scan-ref: terraform
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+          trivyignores: .trivyignore
+
       - uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
         with:
           role-to-assume: arn:aws:iam::416536282434:role/Github_permission
