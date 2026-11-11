@@ -29,6 +29,7 @@ jobs:
           scan-ref: terraform
           severity: HIGH,CRITICAL
           exit-code: "1"
+          trivyignores: .trivyignore
 
       - uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
         with:

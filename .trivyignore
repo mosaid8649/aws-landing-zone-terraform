@@ -1,0 +1,3 @@
+# AWS-0132: test bucket holds no data; default SSE-S3 encryption applies.
+# A customer-managed KMS key would add cost and key management for no benefit.
+AWS-0132
